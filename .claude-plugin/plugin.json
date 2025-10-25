@@ -1,0 +1,24 @@
+{
+  "name": "matlab-skills",
+  "version": "1.0.0",
+  "description": "A collection of Claude skills for MATLAB development, including Live Script generation, unit testing, and performance optimization.",
+  "author": {
+    "name": "The MathWorks, Inc.",
+    "url": "https://github.com/matlab/skills"
+  },
+  "homepage": "https://github.com/matlab/skills",
+  "repository": "https://github.com/matlab/skills",
+  "license": "BSD-3-Clause",
+  "keywords": [
+    "matlab",
+    "live-scripts",
+    "testing",
+    "performance",
+    "optimization",
+    "vectorization",
+    "code-generation",
+    "scientific-computing",
+    "data-analysis",
+    "programming"
+  ]
+}
