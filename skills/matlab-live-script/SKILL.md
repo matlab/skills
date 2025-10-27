@@ -134,15 +134,6 @@ grid on
 %---
 ```
 
-## Evaluation Command
-
-After creating a Live Script, evaluate it using:
-```matlab
-matlab.internal.liveeditor.executeAndSave('FILENAME.m')
-```
-
-This command inserts computational outputs (text and images) into the Live Script.
-
 ## Structure Pattern
 
 A typical Live Script follows this pattern:
