@@ -39,6 +39,9 @@ Every Live Script must end with this exact formatting:
 %---
 ```
 
+### Reading Live Scripts (Token Optimization)
+When reading a Live Script file to pass back to the language model, you can save significant token count by ignoring everything below the appendix marker (which begins with `%[appendix]`). This optimization avoids passing large embedded images that are stored in the appendix section. All working code and text content appears before the appendix, so no functional information is lost.
+
 ## Formatting Rules
 
 ### Section Headers
