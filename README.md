@@ -58,17 +58,33 @@ Optimizes MATLAB code for better performance through vectorization, memory manag
 
 **When it activates**: User requests optimization, mentions slow code, performance issues, speed improvements, or asks to make code faster or more efficient.
 
+### 🌐 MATLAB uihtml App Builder
+**Skill ID**: `matlab-uihtml-app-builder`
+
+Builds interactive web applications using HTML/JavaScript interfaces with MATLAB computational backends via the uihtml component:
+
+- Bidirectional HTML-MATLAB communication patterns
+- Event handling and data transfer strategies
+- Security and input validation best practices
+- Complete working examples (calculator, visualizer, forms)
+- Modern UI design with CSS styling
+- Error handling and debugging techniques
+- Performance optimization for web apps
+- Testing strategies for HTML/MATLAB integration
+
+**When it activates**: Creating HTML-based MATLAB apps, JavaScript MATLAB interfaces, web UIs, interactive GUIs, or when user mentions uihtml, HTML, JavaScript, web apps, or web interfaces.
+
 ## Installation & Usage
 
 ### Claude Code (CLI)
 
-**Recommended**: Install all three skills together as a plugin:
+**Recommended**: Install all skills together as a plugin:
 
 ```bash
 /plugin install github:matlab/skills
 ```
 
-This installs all three MATLAB skills (`matlab-live-script`, `matlab-test-generator`, `matlab-performance-optimizer`) in one command. Skills automatically activate when Claude detects relevant tasks.
+This installs all MATLAB skills (`matlab-live-script`, `matlab-test-generator`, `matlab-performance-optimizer`, `matlab-uihtml-app-builder`) in one command. Skills automatically activate when Claude detects relevant tasks.
 
 **Alternative**: Manually install to your personal skills directory:
 
@@ -104,9 +120,10 @@ cd skills
 zip -r matlab-live-script.zip matlab-live-script/SKILL.md
 zip -r matlab-test-generator.zip matlab-test-generator/SKILL.md
 zip -r matlab-performance-optimizer.zip matlab-performance-optimizer/SKILL.md
+zip -r matlab-uihtml-app-builder.zip matlab-uihtml-app-builder/SKILL.md
 ```
 
-Upload all three ZIP files to get the complete MATLAB skills collection. Skills work transparently - Claude automatically uses them when appropriate.
+Upload all ZIP files to get the complete MATLAB skills collection. Skills work transparently - Claude automatically uses them when appropriate.
 
 ### Claude Desktop
 
@@ -130,9 +147,10 @@ cd skills
 zip -r matlab-live-script.zip matlab-live-script/SKILL.md
 zip -r matlab-test-generator.zip matlab-test-generator/SKILL.md
 zip -r matlab-performance-optimizer.zip matlab-performance-optimizer/SKILL.md
+zip -r matlab-uihtml-app-builder.zip matlab-uihtml-app-builder/SKILL.md
 ```
 
-Upload all three ZIP files to get the complete MATLAB skills collection. Skills integrate seamlessly with your desktop workflow.
+Upload all ZIP files to get the complete MATLAB skills collection. Skills integrate seamlessly with your desktop workflow.
 
 ### Claude API
 
@@ -168,7 +186,9 @@ skills/
 │   │   └── SKILL.md
 │   ├── matlab-test-generator/      # Unit testing skill
 │   │   └── SKILL.md
-│   └── matlab-performance-optimizer/  # Performance optimization skill
+│   ├── matlab-performance-optimizer/  # Performance optimization skill
+│   │   └── SKILL.md
+│   └── matlab-uihtml-app-builder/  # HTML/JavaScript app builder skill
 │       └── SKILL.md
 ├── README.md                       # This file
 ├── CONTRIBUTING.md                 # Contribution guidelines
