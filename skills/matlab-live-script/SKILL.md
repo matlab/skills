@@ -2,11 +2,6 @@
 name: matlab-live-script
 description: Create MATLAB plain text Live Scripts (.m files) following specific formatting rules. Use when generating MATLAB scripts, educational MATLAB content, Live Scripts, or when the user requests .m files with rich text formatting.
 license: MathWorks BSD-3-Clause (see LICENSE)
-allowed-tools:
-  - Read
-  - Write
-  - Edit
-  - Bash
 ---
 
 # MATLAB Plain Text Live Script Generator
