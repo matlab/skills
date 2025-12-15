@@ -66,6 +66,19 @@ Bulleted lists must have a backslash on the last item:
 %[text] - bullet 3 \
 ```
 
+
+### Tables
+
+```matlab
+%[text:table]
+%[text] | Column A | Column B |
+%[text] | --- | --- |
+%[text] | Value 1 | Value 2 |
+%[text] | Value 3 | Value 4 |
+%[text:table]
+```
+
+
 ### LaTeX Equations
 Format equations with double backslashes:
 
