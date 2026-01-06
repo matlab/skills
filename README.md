@@ -235,7 +235,7 @@ Copyright (c) 2025, The MathWorks, Inc. All rights reserved.
 ## Community
 
 - **Issues**: Report bugs or request features via [GitHub Issues](https://github.com/matlab/skills/issues)
-- **Discussions**: Share ideas and ask questions in [MATLAB Central GenAI Discussions Channel](https://www.mathworks.com/matlabcentral/discussions/aihttps://github.com/matlab/skills/discussions)
+- **Discussions**: Share ideas and ask questions in [MATLAB Central GenAI Discussions Channel](https://www.mathworks.com/matlabcentral/discussions/ai)
 
 ---
 
