@@ -1,24 +1,23 @@
-# MATLAB Skills for Claude
+# MATLAB Skills for Coding Agents
 
-A community-driven collection of [Claude Skills](https://www.anthropic.com/news/skills) for MATLAB development. Skills are specialized instruction sets that extend Claude's capabilities for specific tasks, automatically activating when needed.
+A collection of [Agent Skills](https://www.anthropic.com/news/skills) for MATLAB development using coding agents. Skills are specialized instruction sets that extend the capabilities of coding agents for specific tasks, automatically activating when needed.
 
 ## What are Skills?
 
-Skills are modular, portable capabilities that work across all Claude platforms:
+Skills are modular, portable capabilities that work across coding agents:
 
 - **Composable**: Skills stack together automatically when needed
-- **Portable**: Write once, use everywhere (Claude.ai, Claude Desktop, Claude Code, API)
 - **Efficient**: Only load when relevant to your current task
 - **Powerful**: Combine instructions with executable code for reliable results
 
 ## Available Skills
 
-### 🔬 MATLAB Live Script Generator
+### MATLAB Live Script Generator
 **Skill ID**: `matlab-live-script`
 
 Creates properly formatted MATLAB plain text Live Scripts (.m files) with rich text documentation, equations, and visualizations. Automatically handles:
 
-- Correct section formatting with `%[text]` markers
+- Section formatting with `%[text]` markers
 - LaTeX equation rendering with double backslashes
 - Bulleted lists with proper termination
 - Required appendix formatting
@@ -27,10 +26,10 @@ Creates properly formatted MATLAB plain text Live Scripts (.m files) with rich t
 
 **When it activates**: Creating MATLAB scripts, educational content, Live Scripts, or .m files with documentation.
 
-### ✅ MATLAB Test Generator
+### MATLAB Test Generator
 **Skill ID**: `matlab-test-generator`
 
-Creates comprehensive unit tests using the MATLAB Testing Framework. Generates test classes, test methods, and test suites following best practices:
+Creates unit tests using the MATLAB Testing Framework. Generates test classes, test methods, and test suites following best practices:
 
 - Class-based test structure with `matlab.unittest.TestCase`
 - Proper test method naming and organization
@@ -42,7 +41,7 @@ Creates comprehensive unit tests using the MATLAB Testing Framework. Generates t
 
 **When it activates**: Generating test files, test cases, unit tests, test suites, or when testing MATLAB code is requested.
 
-### ⚡ MATLAB Performance Optimizer
+### MATLAB Performance Optimizer
 **Skill ID**: `matlab-performance-optimizer`
 
 Optimizes MATLAB code for better performance through vectorization, memory management, and profiling guidance:
@@ -58,7 +57,7 @@ Optimizes MATLAB code for better performance through vectorization, memory manag
 
 **When it activates**: User requests optimization, mentions slow code, performance issues, speed improvements, or asks to make code faster or more efficient.
 
-### 🌐 MATLAB uihtml App Builder
+### MATLAB uihtml App Builder
 **Skill ID**: `matlab-uihtml-app-builder`
 
 Builds interactive web applications using HTML/JavaScript interfaces with MATLAB computational backends via the uihtml component:
@@ -211,7 +210,7 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 1. Fork this repository
 2. Create a new skill directory: `skills/your-skill-name/`
 3. Add a `SKILL.md` file with proper frontmatter
-4. Test thoroughly with Claude Code
+4. Test thoroughly with a coding agent
 5. Submit a pull request
 
 ## Skill Development Resources
@@ -230,7 +229,7 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 This project is licensed under the MathWorks BSD-3-Clause License - see the [LICENSE](LICENSE) file for details.
 
-Copyright (c) 2025, The MathWorks, Inc. All rights reserved.
+Copyright (c) 2025-2026, The MathWorks, Inc. All rights reserved.
 
 ## Community
 
@@ -239,4 +238,4 @@ Copyright (c) 2025, The MathWorks, Inc. All rights reserved.
 
 ---
 
-**Note**: Skills require Claude models with Code Execution Tool support. Feature availability may vary by plan and platform.
+**Note**: Skills require models with Code Execution Tool support. Feature availability may vary by plan and platform.
