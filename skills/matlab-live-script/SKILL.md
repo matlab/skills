@@ -1,12 +1,12 @@
 ---
 name: matlab-live-script
-description: Create MATLAB plain text Live Scripts (.m files) following specific formatting rules. Use when generating MATLAB scripts, educational MATLAB content, Live Scripts, or when the user requests .m files with rich text formatting.
+description: Create MATLAB plain text Live Scripts (.m files) following specific formatting rules in MATLAb R2025a+. Use when generating MATLAB scripts, educational MATLAB content, Live Scripts, or when the user requests .m files with rich text formatting.
 license: MathWorks BSD-3-Clause (see LICENSE)
 ---
 
 # MATLAB Plain Text Live Script Generator
 
-This skill provides comprehensive guidelines for creating properly formatted MATLAB plain text Live Scripts. These scripts combine executable MATLAB code with rich text documentation in a single .m file.
+This skill provides guidelines for creating properly formatted MATLAB plain text Live Scripts. These scripts combine executable MATLAB code with rich text documentation in a single .m file.
 
 ## When to Use This Skill
 
@@ -80,13 +80,30 @@ Bulleted lists must have a backslash on the last item:
 
 
 ### LaTeX Equations
-Format equations with double backslashes:
 
+All backslashes in LaTeX must be doubled (e.g., `\\frac` not `\frac`).
+
+**Inline Equations:**
 ```matlab
-%[text] $ e = \\sum_{\\alpha=0}^\\infty \\alpha^n/n! $
+%[text] The pole $a${"editStyle":"visual"} determines stability.
+%[text] The sum $ e = \\sum_{n=0}^\\infty 1/n! ${"editStyle":"visual"} converges.
 ```
 
-Note: All backslashes in LaTeX must be doubled.
+**Display Equations:**
+```matlab
+%[text] $\\[
+\\frac{1}{s-a}
+\\]
+$
+```
+
+**Complex Display Equation Example:**
+```matlab
+%[text] $\\[
+\\mathcal{L}\\{e^{at}\\} = \\int_{0}^{\\infty} e^{-st} e^{at}\\, dt = \\frac{1}{s-a}
+\\]
+$
+```
 
 ### Comments for Readers
 **DO NOT** use fprintf for reader comments:
@@ -182,7 +199,10 @@ A typical Live Script follows this pattern:
 ```matlab
 %[text] ## Theory
 %[text] The discrete Fourier transform is defined as:
-%[text] $ X(k) = \\sum_{n=0}^{N-1} x(n)e^{-j2\\pi kn/N} $
+%[text] $\\[
+X(k) = \\sum_{n=0}^{N-1} x(n)e^{-j2\\pi kn/N}
+\\]
+$
 ```
 
 ### Code with Inline Comments
@@ -237,3 +257,17 @@ Before finishing a Live Script, verify:
 
 **Issue**: Script won't save with outputs
 - **Solution**: Verify appendix is exactly as specified, with proper indentation
+
+## Known Issues
+
+### Bracket Escaping
+
+MATLAB may occasionally escape brackets in `%[text]` markup during execution. This is a known quirk. If you notice `%\[text\]` appearing in your file after execution, the markup should still function correctly.
+
+### Unsupported LaTeX Commands
+
+Some LaTeX commands are not supported in MATLAB Live Scripts. Known unsupported commands include:
+- `\xrightarrow` - Use `\rightarrow` with superscript/subscript instead
+- Other advanced math mode commands may have limited support
+
+If an equation doesn't render, try simplifying or using alternative LaTeX syntax.
