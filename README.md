@@ -73,6 +73,22 @@ Builds interactive web applications using HTML/JavaScript interfaces with MATLAB
 
 **When it activates**: Creating HTML-based MATLAB apps, JavaScript MATLAB interfaces, web UIs, interactive GUIs, or when user mentions uihtml, HTML, JavaScript, web apps, or web interfaces.
 
+### MATLAB Digital Filter Design
+**Skill ID**: `matlab-digital-filter-design`
+
+Designs and validates digital filters in MATLAB using Signal Processing Toolbox and DSP System Toolbox:
+
+- FIR and IIR filter design (lowpass, highpass, bandpass, bandstop, notch)
+- Architecture selection guidance (single-stage vs efficient alternatives)
+- `designfilt()` workflow with proper sample rate handling
+- Filter Analyzer for visual comparison of designs
+- Multirate and multistage filter optimization for narrow transitions
+- Streaming (causal) vs offline (batch) mode support
+- Zero-phase filtering with `filtfilt()` for offline processing
+- Numerical verification of passband ripple and stopband attenuation
+
+**When it activates**: Cleaning up noisy signals, removing interference, filtering signals, designing FIR/IIR filters, or comparing filters in Filter Analyzer.
+
 ## Installation & Usage
 
 ### Claude Code (CLI)
@@ -83,7 +99,7 @@ Builds interactive web applications using HTML/JavaScript interfaces with MATLAB
 /plugin install github:matlab/skills
 ```
 
-This installs all MATLAB skills (`matlab-live-script`, `matlab-test-generator`, `matlab-performance-optimizer`, `matlab-uihtml-app-builder`) in one command. Skills automatically activate when Claude detects relevant tasks.
+This installs all MATLAB skills (`matlab-live-script`, `matlab-test-generator`, `matlab-performance-optimizer`, `matlab-uihtml-app-builder`, `matlab-digital-filter-design`) in one command. Skills automatically activate when Claude detects relevant tasks.
 
 **Alternative**: Manually install to your personal skills directory:
 
@@ -120,6 +136,7 @@ zip -r matlab-live-script.zip matlab-live-script/SKILL.md
 zip -r matlab-test-generator.zip matlab-test-generator/SKILL.md
 zip -r matlab-performance-optimizer.zip matlab-performance-optimizer/SKILL.md
 zip -r matlab-uihtml-app-builder.zip matlab-uihtml-app-builder/SKILL.md
+zip -r matlab-digital-filter-design.zip matlab-digital-filter-design/SKILL.md
 ```
 
 Upload all ZIP files to get the complete MATLAB skills collection. Skills work transparently - Claude automatically uses them when appropriate.
@@ -147,6 +164,7 @@ zip -r matlab-live-script.zip matlab-live-script/SKILL.md
 zip -r matlab-test-generator.zip matlab-test-generator/SKILL.md
 zip -r matlab-performance-optimizer.zip matlab-performance-optimizer/SKILL.md
 zip -r matlab-uihtml-app-builder.zip matlab-uihtml-app-builder/SKILL.md
+zip -r matlab-digital-filter-design.zip matlab-digital-filter-design/SKILL.md
 ```
 
 Upload all ZIP files to get the complete MATLAB skills collection. Skills integrate seamlessly with your desktop workflow.
@@ -187,7 +205,9 @@ skills/
 │   │   └── SKILL.md
 │   ├── matlab-performance-optimizer/  # Performance optimization skill
 │   │   └── SKILL.md
-│   └── matlab-uihtml-app-builder/  # HTML/JavaScript app builder skill
+│   ├── matlab-uihtml-app-builder/  # HTML/JavaScript app builder skill
+│   │   └── SKILL.md
+│   └── matlab-digital-filter-design/  # Digital filter design skill
 │       └── SKILL.md
 ├── README.md                       # This file
 ├── CONTRIBUTING.md                 # Contribution guidelines
