@@ -113,61 +113,51 @@ cp -r skills/skills/* ~/.claude/skills/
 
 Once installed, just ask Claude to "create a MATLAB Live Script" or "optimize this code" and the appropriate skill will load automatically.
 
-### Claude.ai (Web)
+### Claude.ai (Web) and Claude Desktop
 
 Skills are available to Pro, Max, Team, and Enterprise users. Each skill must be uploaded separately as a ZIP file.
 
 **Uploading Skills:**
 
-1. Navigate to **Settings** → **Capabilities**
+1. Open **Settings** → **Capabilities**
 2. Enable Skills (Team/Enterprise admins must enable organization-wide first)
 3. Click **Upload Skill** for each skill you want to add
 
 **Creating ZIP Files:**
 
-Each skill requires a ZIP file with `SKILL.md` at the root level:
+Each skill requires a ZIP file with `SKILL.md` at the root level. Some skills include additional resource folders (like `knowledge/`) that must be included.
+
+*Single skill (macOS/Linux):*
 
 ```bash
-# Navigate to the skills directory
-cd skills
-
-# Create ZIP for each skill
-zip -r matlab-live-script.zip matlab-live-script/SKILL.md
-zip -r matlab-test-generator.zip matlab-test-generator/SKILL.md
-zip -r matlab-performance-optimizer.zip matlab-performance-optimizer/SKILL.md
-zip -r matlab-uihtml-app-builder.zip matlab-uihtml-app-builder/SKILL.md
-zip -r matlab-digital-filter-design.zip matlab-digital-filter-design/SKILL.md
+cd skills/<skill-name>
+zip -r ../<skill-name>.zip .
 ```
 
-Upload all ZIP files to get the complete MATLAB skills collection. Skills work transparently - Claude automatically uses them when appropriate.
+*Single skill (Windows PowerShell):*
 
-### Claude Desktop
+```powershell
+cd skills
+Compress-Archive -Path "<skill-name>\*" -DestinationPath "<skill-name>.zip"
+```
 
-Each skill must be uploaded separately as a ZIP file.
-
-**Uploading Skills:**
-
-1. Open **Settings** → **Capabilities**
-2. Enable the Skills feature
-3. Click **Upload Skill** for each skill you want to add
-
-**Creating ZIP Files:**
-
-Each skill requires a ZIP file with `SKILL.md` at the root level:
+*All skills at once (macOS/Linux):*
 
 ```bash
-# Navigate to the skills directory
 cd skills
-
-# Create ZIP for each skill
-zip -r matlab-live-script.zip matlab-live-script/SKILL.md
-zip -r matlab-test-generator.zip matlab-test-generator/SKILL.md
-zip -r matlab-performance-optimizer.zip matlab-performance-optimizer/SKILL.md
-zip -r matlab-uihtml-app-builder.zip matlab-uihtml-app-builder/SKILL.md
-zip -r matlab-digital-filter-design.zip matlab-digital-filter-design/SKILL.md
+for d in */; do (cd "$d" && zip -r "../${d%/}.zip" .); done
 ```
 
-Upload all ZIP files to get the complete MATLAB skills collection. Skills integrate seamlessly with your desktop workflow.
+*All skills at once (Windows PowerShell):*
+
+```powershell
+cd skills
+Get-ChildItem -Directory | ForEach-Object {
+    Compress-Archive -Path "$($_.Name)\*" -DestinationPath "$($_.Name).zip" -Force
+}
+```
+
+Upload the ZIP files to get the MATLAB skills collection. Skills activate automatically when Claude detects relevant tasks.
 
 ### Claude API
 
@@ -191,28 +181,6 @@ response = client.messages.create(
 **Requirements**:
 - Skills API access (see [API documentation](https://docs.anthropic.com/))
 - Code Execution Tool beta enabled
-
-## Repository Structure
-
-```
-skills/
-├── .claude-plugin/
-│   └── plugin.json                 # Plugin manifest for Claude Code
-├── skills/
-│   ├── matlab-live-script/         # Live Script generation skill
-│   │   └── SKILL.md
-│   ├── matlab-test-generator/      # Unit testing skill
-│   │   └── SKILL.md
-│   ├── matlab-performance-optimizer/  # Performance optimization skill
-│   │   └── SKILL.md
-│   ├── matlab-uihtml-app-builder/  # HTML/JavaScript app builder skill
-│   │   └── SKILL.md
-│   └── matlab-digital-filter-design/  # Digital filter design skill
-│       └── SKILL.md
-├── README.md                       # This file
-├── CONTRIBUTING.md                 # Contribution guidelines
-└── LICENSE                         # MathWorks BSD-3-Clause License
-```
 
 ## Contributing
 
