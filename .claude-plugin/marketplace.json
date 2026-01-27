@@ -1,0 +1,33 @@
+{
+  "name": "matlab-skills",
+  "owner": {
+    "name": "The MathWorks, Inc."
+  },
+  "metadata": {
+    "description": "MATLAB skills for Claude Code - Live Scripts, testing, performance optimization, uihtml apps, and digital filter design"
+  },
+  "plugins": [
+    {
+      "name": "matlab-skills",
+      "source": "./",
+      "description": "A collection of Claude skills for MATLAB development, including Live Script generation, unit testing, performance optimization, and HTML/JavaScript app building.",
+      "version": "1.0.0",
+      "author": {
+        "name": "The MathWorks, Inc."
+      },
+      "homepage": "https://github.com/matlab/skills",
+      "repository": "https://github.com/matlab/skills",
+      "license": "BSD-3-Clause",
+      "keywords": [
+        "matlab",
+        "live-scripts",
+        "testing",
+        "performance",
+        "optimization",
+        "uihtml",
+        "digital-filter"
+      ],
+      "category": "development"
+    }
+  ]
+}
