@@ -1,7 +1,7 @@
 {
   "name": "matlab-skills",
   "version": "1.0.0",
-  "description": "A collection of Claude skills for MATLAB development, including Live Script generation, unit testing, performance optimization, and HTML/JavaScript app building.",
+  "description": "A collection of agent skills for MATLAB development, including Live Script generation, unit testing, performance optimization, and HTML/JavaScript app building.",
   "author": {
     "name": "The MathWorks, Inc.",
     "url": "https://github.com/matlab/skills"
