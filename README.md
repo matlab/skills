@@ -229,4 +229,4 @@ Copyright (c) 2025-2026, The MathWorks, Inc. All rights reserved.
 
 ---
 
-**Note**: Skills require models with Code Execution Tool support. Feature availability may vary by plan and platform.
+**Supported Coding Agents**: Agent Skills are supported by [Claude Code](https://claude.ai/code), [Claude.ai](https://claude.ai), [Cursor](https://cursor.com), [VS Code](https://code.visualstudio.com), [GitHub Copilot](https://github.com), [Gemini CLI](https://geminicli.com), [OpenAI Codex](https://developers.openai.com/codex), [Amp](https://ampcode.com), [Goose](https://block.github.io/goose), [Roo Code](https://roocode.com), and [many more](https://agentskills.io). Feature availability may vary by plan and platform.
