@@ -1,6 +1,6 @@
 # MATLAB Skills for Coding Agents
 
-A collection of [Agent Skills](https://www.anthropic.com/news/skills) for MATLAB development using coding agents. Skills are specialized instruction sets that extend the capabilities of coding agents for specific tasks, automatically activating when needed.
+A collection of [Agent Skills](https://agentskills.io) for MATLAB development using coding agents. Skills are specialized instruction sets that extend the capabilities of coding agents for specific tasks, automatically activating when needed.
 
 ## What are Skills?
 
@@ -203,15 +203,18 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ## Skill Development Resources
 
-- [Official Skills Documentation](https://docs.claude.com/en/docs/claude-code/skills)
-- [Agent Skills Specification](https://github.com/anthropics/skills/blob/main/agent_skills_spec.md)
-- [Anthropic Skills Repository](https://github.com/anthropics/skills)
-- [Claude Code Plugin Guide](https://docs.claude.com/en/docs/claude-code/plugins)
+- [Official Skills Documentation](https://code.claude.com/docs/en/skills)
+- [Agent Skills Specification](https://agentskills.io/specification)
+- [Agent Skills Repository](https://github.com/agentskills/agentskills) - Specification and documentation for Agent Skills
+- [Anthropic Skills Repository](https://github.com/anthropics/skills) - Example skills demonstrating Agent Skills capabilities
+- [Claude Code Plugin Guide](https://code.claude.com/docs/en/plugins)
 
 ## Related Projects
 
-- [matlab/prompts](https://github.com/matlab/prompts) - AI coding prompts for MATLAB development
-- [anthropics/skills](https://github.com/anthropics/skills) - Official Anthropic skills repository
+- [matlab/matlab-mcp-core-server](https://github.com/matlab/matlab-mcp-core-server) - Official MATLAB MCP Server for running MATLAB using AI applications like Claude Code and VS Code
+- [matlab/rules](https://github.com/matlab/rules) - MATLAB coding rules and guidelines optimized for AI coding assistants
+- [matlab/prompts](https://github.com/matlab/prompts) - Curated collection of AI prompts for MATLAB development
+- [matlab/slash-commands](https://github.com/matlab/slash-commands) - Slash commands for streamlining MATLAB development workflows in Claude Code
 
 ## License
 
