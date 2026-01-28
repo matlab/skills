@@ -93,10 +93,14 @@ Designs and validates digital filters in MATLAB using Signal Processing Toolbox 
 
 ### Claude Code (CLI)
 
-**Recommended**: Install all skills together as a plugin:
+**Recommended**: Install all MATLAB agent skills using the plugin marketplace:
 
 ```bash
-/plugin install github:matlab/skills
+# (Step 1) Add the marketplace to Claude Code
+/plugin marketplace add matlab/skills
+
+# (Step 2) Install all the MATLAB Agent Skills
+/plugin install matlab-skills@matlab-skills
 ```
 
 This installs all MATLAB skills (`matlab-live-script`, `matlab-test-generator`, `matlab-performance-optimizer`, `matlab-uihtml-app-builder`, `matlab-digital-filter-design`) in one command. Skills automatically activate when Claude detects relevant tasks.
