@@ -1,42 +1,54 @@
 {
   "name": "matlab-skills",
-  "version": "1.0.1",
-  "description": "A collection of agent skills for MATLAB development, including Live Script generation, unit testing, performance optimization, HTML/JavaScript app building, and digital filter design.",
-  "author": {
-    "name": "The MathWorks, Inc.",
-    "url": "https://github.com/matlab/skills"
+  "owner": {
+    "name": "The MathWorks, Inc."
   },
-  "homepage": "https://github.com/matlab/skills",
-  "repository": "https://github.com/matlab/skills",
-  "license": "BSD-3-Clause",
-  "keywords": [
-    "matlab",
-    "live-scripts",
-    "testing",
-    "performance",
-    "optimization",
-    "vectorization",
-    "code-generation",
-    "scientific-computing",
-    "data-analysis",
-    "programming",
-    "html",
-    "javascript",
-    "uihtml",
-    "web",
-    "interactive",
-    "gui",
-    "webapp",
-    "filter",
-    "digital-filter",
-    "signal-processing",
-    "fir",
-    "iir",
-    "lowpass",
-    "highpass",
-    "bandpass",
-    "bandstop",
-    "notch",
-    "dsp"
+  "metadata": {
+    "description": "A collection of agent skills for MATLAB development, including Live Script generation, unit testing, performance optimization, HTML/JavaScript app building, and digital filter design.",
+    "version": "1.0.1"
+  },
+  "plugins": [
+    {
+      "name": "matlab-skills",
+      "source": "./",
+      "description": "A collection of agent skills for MATLAB development",
+      "version": "1.0.1",
+      "author": {
+        "name": "The MathWorks, Inc."
+      },
+      "homepage": "https://github.com/matlab/skills",
+      "repository": "https://github.com/matlab/skills",
+      "license": "BSD-3-Clause",
+      "keywords": [
+        "matlab",
+        "live-scripts",
+        "testing",
+        "performance",
+        "optimization",
+        "vectorization",
+        "code-generation",
+        "scientific-computing",
+        "data-analysis",
+        "programming",
+        "html",
+        "javascript",
+        "uihtml",
+        "web",
+        "interactive",
+        "gui",
+        "webapp",
+        "filter",
+        "digital-filter",
+        "signal-processing",
+        "fir",
+        "iir",
+        "lowpass",
+        "highpass",
+        "bandpass",
+        "bandstop",
+        "notch",
+        "dsp"
+      ]
+    }
   ]
 }
