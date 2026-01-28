@@ -203,11 +203,11 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ## Skill Development Resources
 
-- [Official Skills Documentation](https://code.claude.com/docs/en/skills)
-- [Agent Skills Specification](https://agentskills.io/specification)
+- [Official Skills Documentation](https://code.claude.com/docs/en/skills) - Claude Code documentation for using and creating skills
+- [Agent Skills Specification](https://agentskills.io/specification) - Complete format specification for SKILL.md files
 - [Agent Skills Repository](https://github.com/agentskills/agentskills) - Specification and documentation for Agent Skills
 - [Anthropic Skills Repository](https://github.com/anthropics/skills) - Example skills demonstrating Agent Skills capabilities
-- [Claude Code Plugin Guide](https://code.claude.com/docs/en/plugins)
+- [Claude Code Plugin Guide](https://code.claude.com/docs/en/plugins) - Guide for installing and managing skill plugins
 
 ## Related Projects
 
