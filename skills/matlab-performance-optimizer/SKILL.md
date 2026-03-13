@@ -519,16 +519,16 @@ Before finalizing optimized code, verify:
 
 ### Pitfall 3: Ignoring Memory Access Patterns
 ```matlab
-% SLOW - column-wise access (MATLAB is column-major)
-for j = 1:cols
-    for i = 1:rows
+% SLOW - row-wise iteration (MATLAB is column-major)
+for i = 1:rows
+    for j = 1:cols
         A(i,j) = process(i, j);
     end
 end
 
-% FAST - row-wise iteration, column-wise access
-for i = 1:rows
-    for j = 1:cols
+% FAST - column-wise iteration
+for j = 1:cols
+    for i = 1:rows
         A(i,j) = process(i, j);
     end
 end
