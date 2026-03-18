@@ -1,6 +1,6 @@
 ---
 name: matlab-test-creator
-description: Create comprehensive MATLAB unit tests using the MATLAB Testing Framework. Use when generating test files, test cases, unit tests, test suites, or when the user requests testing for MATLAB code, functions, or classes.
+description: Create comprehensive MATLAB unit tests using the MATLAB Testing Framework. Use when generating test files, test cases, unit tests, or when the user requests testing for MATLAB code, functions, or classes.
 license: MathWorks BSD-3-Clause (see LICENSE)
 ---
 
@@ -12,7 +12,7 @@ Generate robust unit tests using the MATLAB Testing Framework. This skill covers
 
 ## Must-Follow Rules
 
-- **Present a test plan first** - Never write test files without user-approved plan. Use the simple or standard path as appropriate.
+- **Present a test plan if needed** - Create a user-approved test plan before writing test code unless the scope is limited and straightforward.
 - **Show diff before updating** - For existing test files, always show the user a diff and wait for approval before editing.
 - **Always use class-based tests** - Every test file must define a class inheriting from `matlab.unittest.TestCase`. Never use function-based or script-based tests.
 - **Do not guess requirements** - If scope or expected behaviors are unclear, **ask**
@@ -44,14 +44,18 @@ end
 - Descriptive camelCase names starting with lowercase
 - Example: `testAdditionWithPositiveNumbers`
 
+### Test location
+Ideally, add all test files to a `tests/` folder alongside the source
+
 ### Properties
 Use Mixed case unless it's a TestParameter. For a TestParameter, use camelCase. Only use properties if local variables won't suffice.
 
-### Assertions
+### Assertions / Qualifications
 - Prefer `verify*` methods (continue on failure) over `assert*` (stop on failure)
 - Use `verifyError(@() func(args), "errorID")` for error testing
 - Use `verifyWarningFree(@() func(args))` for clean execution
-- **Floating-point comparisons MUST use tolerance:**
+- Prefer informal APIs over `verifyThat` calls
+- **Floating-point comparisons should use tolerance:**
   ```matlab
   testCase.verifyEqual(actual, expected, AbsTol=1e-10);
   testCase.verifyEqual(actual, expected, RelTol=1e-6);
@@ -67,7 +71,7 @@ Parameterize only when **assertion logic is identical** across all cases — onl
 
 ### Test Scope
 - **Test public interfaces, not implementation.** Never test private methods directly — verify correctness through the public API.
-- If a private method seems complex enough to need its own tests, refactor it into a separate, publicly testable function.
+- If a private method seems complex enough to need its own tests, the user should refactor it into a separate, publicly testable function.
 
 ### Determinism
 For tests involving randomness, seed the RNG and restore it:
@@ -91,7 +95,7 @@ testCase.assumeTrue(canUseGPU(), "Requires GPU");
 Use `TestTags` attribute (e.g., `'Unit'`, `'Integration'`, `'Slow'`, `'GPU'`) on `methods (Test)` blocks for selective execution.
 
 ### Test independence
-Each test should be able to run independently and compatible with running tests in parallel.
+Each test should be able to run independently and be compatible with running tests in parallel.
 
 ### Adding path to source files
 Use PathFixture to add paths so the tests have access to the source if needed. Use `IncludingSubfolders` when there are nested packages or subdirectories that also need to be on the path:
@@ -108,16 +112,10 @@ end
 
 For more details, if necessary, see [references/fixtures.md](references/fixtures.md).
 
-### Edge Cases to Consider
+### Diagnostics
+Add additional diagnostics for clarity where the framework diagnostic may be insufficient.
 
-- Empty inputs (`[]`, `''`, `{}`)
-- Boundary values (0, 1, -1, max, min)
-- Invalid types (string instead of number, etc.)
-- Large inputs (performance/memory)
-- Special values (NaN, Inf, -Inf)
-
-
-## Test Planning
+# Test Planning
 
 **Assess complexity first, then follow the appropriate path.**
 
@@ -126,7 +124,7 @@ For more details, if necessary, see [references/fixtures.md](references/fixtures
 1. Briefly state what you'll test (methods + key edge cases)
 2. Write the test file after user confirms
 
-### Standard tests — 3-phase workflow: Gather → Plan → Implement
+### Standard tests (Large codebase, multiple comprehensive test files) — 3-phase workflow: Gather → Plan → Implement
 
 ## Phase 1: Gather Requirements
 
@@ -142,7 +140,15 @@ For more details, if necessary, see [references/fixtures.md](references/fixtures
 
 ## Phase 2: Present Test Plan for Approval
 
-Present a test plan. Do NOT write any test files until the user confirms the plan.
+Present a test plan. Do NOT write any test files until the user confirms the plan. A plan may include: list of test methods with names, which behaviors each covers, parameterization strategy, fixtures needed, and edge cases selected
+
+### Edge Cases to Consider
+
+- Empty inputs (`[]`, `''`, `{}`)
+- Boundary values (0, 1, -1, max, min)
+- Invalid types (string instead of number, etc.)
+- Large inputs (performance/memory)
+- Special values (NaN, Inf, -Inf)
 
 ## Phase 3: Implement Approved Plan
 

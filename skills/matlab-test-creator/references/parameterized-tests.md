@@ -4,8 +4,6 @@ Data-driven testing using `TestParameter` properties.
 
 ## Basic Parameterized Test
 
-Each `TestParameter` property generates tests for every value. A test method receives one value per parameter.
-
 ```matlab
 properties (TestParameter)
     format = {'png', 'jpg', 'bmp'};
@@ -21,7 +19,7 @@ end
 
 ## Named Parameters with Structs
 
-Use structs for clearer test names and grouped input/expected data. Test names become e.g. `testRectangleArea(rectangleCase=small)`.
+Use structs for clearer test names and grouped input/expected data.
 
 ```matlab
 properties (TestParameter)
@@ -46,15 +44,19 @@ end
 | `sequential` | Zips parameters positionally (1st with 1st, 2nd with 2nd, etc.) | Input-output pairs that must stay aligned. All parameters must have the same number of values. |
 | `pairwise` | Covers all 2-way interactions between parameters, skipping redundant higher-order combinations | 3+ parameters where exhaustive produces too many tests |
 
-**Watch for combinatorial explosion with `exhaustive`**: 4 parameters × 5 values each = 625 tests. If that's excessive, use `pairwise` or reduce parameters.
+> **MATLAB Test add-on (R2023a+):** If you have a MATLAB Test license, you can set `ParameterCombination` to an integer between 2 and 10 to test every n-tuple of parameter values — e.g., `ParameterCombination = 3` covers all 3-way interactions. This generalizes `pairwise` (which is equivalent to n = 2) for cases where higher-order interactions matter.
+
+**Watch for combinatorial explosion with `exhaustive`**: 4 parameters × 5 values each = 625 tests. If that's excessive, use `pairwise`, an n-wise integer (MATLAB Test required), or reduce parameters.
 
 ```matlab
 % exhaustive (default) — every combination
 methods (Test)
-    function testConversion(testCase, dataType, arrayShape) ... end
+    function testConversion(testCase, dataType, arrayShape)
+        % test logic here
+    end
 end
 
-% sequential — paired (must be same length); or use a single struct parameter instead
+% sequential — paired (must be same length)
 methods (Test, ParameterCombination = 'sequential')
     function testPairedInputs(testCase, input, expected)
         testCase.verifyEqual(myFunction(input), expected);
@@ -63,9 +65,13 @@ end
 
 % pairwise — all 2-way interactions, fewer tests than exhaustive
 methods (Test, ParameterCombination = 'pairwise')
-    function testMultipleFactors(testCase, dataType, arrayShape, solver, tolerance) ... end
+    function testMultipleFactors(testCase, dataType, arrayShape, solver, tolerance)
+        % test logic here
+    end
 end
 ```
+
+> **Sequential alternative**: If your inputs and expected outputs are paired, a single struct parameter (see Named Parameters above) is often cleaner than `sequential` — it keeps pairs together, avoids length-mismatch errors, and produces more descriptive test names.
 
 ## Edge Case Parameters
 
@@ -85,7 +91,9 @@ Use when parameters should refresh each run (e.g., files in a folder) or depend 
 Rules:
 - Method must be `Static` with attribute `TestParameterDefinition`
 - Output variable name must match the `TestParameter` property (declared with no default)
-- Inputs can reference `TestParameter` properties at a higher parameterization level
+- Inputs can reference `TestParameter` properties at a higher parameterization level (e.g., a `ClassSetupParameter` or `MethodSetupParameter` property)
+
+**Example 1 — parameters from the filesystem:**
 
 ```matlab
 properties (TestParameter)
@@ -105,8 +113,34 @@ methods (Static, TestParameterDefinition)
 end
 ```
 
+**Example 2 — test parameters that depend on a higher-level (`ClassSetupParameter`) value:**
+
+```matlab
+properties (ClassSetupParameter)
+    precision = {'single', 'double'};
+end
+
+properties (TestParameter)
+    tolerance  % No default — depends on precision
+end
+
+methods (Static, TestParameterDefinition)
+    function tolerance = getTolerance(precision)
+        if strcmp(precision, 'single')
+            tolerance = struct('loose', 1e-4, 'tight', 1e-6);
+        else
+            tolerance = struct('loose', 1e-10, 'tight', 1e-14);
+        end
+    end
+end
+```
+
+Here `getTolerance` receives the `ClassSetupParameter` value as input, so test-parameter values are computed per class-level setup combination.
+
 ## Best Practices
 
+0. **Parameterize only when assertion logic is identical across all cases** — if the test body would need an `if/switch` to handle a value differently, use a separate test instead
 1. **Use meaningful parameter names** — They appear in test results and serve as documentation
 2. **Group related values in structs** — Keeps input/expected together, avoids misaligned `sequential` pairs
 3. **Keep parameter tables small** — If a table keeps growing, consider whether all rows truly test the same logic
+4. **Use the right parameterization level** — `TestParameter` is for test data; use `ClassSetupParameter` for expensive shared fixtures (e.g., opening a connection) and `MethodSetupParameter` for per-test configuration
