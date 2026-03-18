@@ -1,6 +1,11 @@
 ---
 name: matlab-digital-filter-design
 description: Designs and validates digital filters in MATLAB. Use when cleaning up noisy signals, removing interference, filtering signals, designing FIR/IIR filters (lowpass/highpass/bandpass/bandstop/notch), or comparing filters in Filter Analyzer.
+license: MathWorks BSD-3-Clause (see LICENSE)
+compatibility: Requires MATLAB with Signal Processing Toolbox and DSP System Toolbox.
+metadata:
+  author: MathWorks
+  version: "1.0"
 ---
 
 # MATLAB Digital Filter Design Expert

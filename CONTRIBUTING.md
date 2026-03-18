@@ -4,24 +4,10 @@ Thank you for your interest in contributing to MATLAB Skills! This document prov
 
 ## Table of Contents
 
-- [Code of Conduct](#code-of-conduct)
 - [How to Contribute](#how-to-contribute)
 - [Skill Development Guidelines](#skill-development-guidelines)
 - [Testing Requirements](#testing-requirements)
 - [Pull Request Process](#pull-request-process)
-- [Skill Ideas](#skill-ideas)
-
-## Code of Conduct
-
-We are committed to providing a welcoming and inclusive environment. Please be respectful and constructive in all interactions.
-
-### Our Standards
-
-- Be respectful and considerate
-- Welcome newcomers and help them learn
-- Focus on what is best for the community
-- Show empathy towards others
-- Accept constructive criticism gracefully
 
 ## How to Contribute
 
@@ -41,7 +27,7 @@ If you find a bug in an existing skill:
 
 We welcome suggestions for new skills or improvements to existing ones:
 
-1. Open a [GitHub Discussion](https://github.com/matlab/skills/discussions) or Issue
+1. Open a [GitHub Issue](https://github.com/matlab/skills/issues)
 2. Describe the skill or enhancement
 3. Explain the use case and benefits
 4. Provide examples of how it would work
@@ -64,60 +50,48 @@ Each skill must follow this structure:
 
 ```
 skills/your-skill-name/
-└── SKILL.md          # Required: Main skill file
-```
-
-Optional supporting files:
-```
-skills/your-skill-name/
-├── SKILL.md          # Required
-├── examples.md       # Example usage
-├── reference.md      # Additional reference material
-└── scripts/          # Helper scripts if needed
-    └── helper.m
+├── SKILL.md          # Required: metadata + instructions
+├── scripts/          # Optional: executable code
+├── references/       # Optional: documentation
+├── knowledge/        # Optional: structured knowledge base
+├── assets/           # Optional: templates, resources
+└── ...               # Any additional files or directories
 ```
 
 ### SKILL.md Format
 
-Every skill requires a `SKILL.md` file with YAML frontmatter:
+Every skill requires a `SKILL.md` file with YAML frontmatter followed by Markdown content. See the [Agent Skills Specification](https://agentskills.io/specification) for the complete format reference.
 
 ```yaml
 ---
 name: your-skill-name
-description: Clear description of what the skill does and when Claude should use it. Be specific about triggers.
+description: Clear description of what the skill does and when to use it. Be specific about triggers.
 license: MathWorks BSD-3-Clause (see LICENSE)
-allowed-tools:
-  - Read
-  - Write
-  - Edit
-  - Bash
-  - Grep
-  - Glob
+metadata:
+  author: MathWorks
+  version: "1.0"
 ---
 
 # Your Skill Name
 
-[Detailed instructions for Claude...]
+[Detailed instructions for the agent...]
 ```
 
 ### Required Frontmatter Fields
 
-- **name**: Lowercase hyphen-case matching the directory name (e.g., `matlab-live-script`)
-- **description**: Clear, specific description (max 1024 characters)
-  - What the skill does
-  - When Claude should use it
-  - Key capabilities
+- **name**: Max 64 characters. Lowercase letters, numbers, and hyphens only. Must not start or end with a hyphen, and must not contain consecutive hyphens. Must match the parent directory name.
+- **description**: Max 1024 characters. Describes what the skill does and when to use it. Include specific keywords that help agents identify relevant tasks.
 
 ### Optional Frontmatter Fields
 
-- **license**: Use `MathWorks BSD-3-Clause (see LICENSE)` to match repository license
-- **allowed-tools**: List of Claude Code tools the skill can use
-  - Common tools: `Read`, `Write`, `Edit`, `Bash`, `Grep`, `Glob`
-  - Restrict for security or scope control
+- **license**: License name or reference to a bundled license file. Use `MathWorks BSD-3-Clause (see LICENSE)` for skills in this repository.
+- **compatibility**: Max 500 characters. Indicates environment requirements such as required toolboxes, system packages, or network access.
+- **metadata**: Arbitrary key-value mapping for additional metadata (e.g., `author`, `version`).
+- **allowed-tools**: Space-delimited list of pre-approved tools the skill may use. (Experimental; support may vary between agent implementations.)
 
 ### Naming Conventions
 
-- **Skill names**: lowercase, hyphen-separated (e.g., `matlab-debugging-helper`)
+- **Skill names**: Lowercase letters, numbers, and hyphens only (e.g., `matlab-debugging-helper`)
 - **Directory names**: Must exactly match the `name` field in frontmatter
 - **File names**: `SKILL.md` (case-sensitive)
 
@@ -224,32 +198,12 @@ Verify the skill activates appropriately:
 3. Once approved, your skill will be merged
 4. Thank you for contributing!
 
-## Skill Ideas
-
-Looking for inspiration? Here are some skill ideas:
-
-- **MATLAB Test Creator**: Create unit tests using the MATLAB Testing Framework
-- **MATLAB Test Execution**: Run tests, collect coverage, and configure CI/CD pipelines
-- **MATLAB Performance Optimizer**: Vectorization and performance improvement suggestions
-- **Simulink Model Documentation**: Generate documentation for Simulink models
-- **MATLAB App Designer Helper**: Guide for creating MATLAB App Designer applications
-- **MATLAB Data Import Helper**: Assist with various data import formats
-- **MATLAB Plot Styler**: Create publication-quality figures
-- **MATLAB Debugging Assistant**: Help debug MATLAB code with common patterns
-- **MATLAB Code Converter**: Convert between MATLAB and other languages
-- **MATLAB Package Creator**: Help structure MATLAB packages and classes
-- **MATLAB Parallel Computing Helper**: Optimize code for parallel execution
-
 ## Questions?
 
-- Open a [GitHub Discussion](https://github.com/matlab/skills/discussions)
 - Check existing [Issues](https://github.com/matlab/skills/issues)
-- Review the [Agent Skills Specification](https://github.com/anthropics/skills/blob/main/agent_skills_spec.md)
+- Review the [Agent Skills Specification](https://agentskills.io/specification)
 
 ## License
 
 By contributing, you agree that your contributions will be licensed under the MathWorks BSD-3-Clause License. See the [LICENSE](LICENSE) file for full terms.
 
----
-
-Thank you for helping make MATLAB development with Claude even better!

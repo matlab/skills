@@ -2,6 +2,9 @@
 name: matlab-performance-optimizer
 description: Optimize MATLAB code for better performance through vectorization, memory management, and profiling. Use when user requests optimization, mentions slow code, performance issues, speed improvements, or asks to make code faster or more efficient.
 license: MathWorks BSD-3-Clause (see LICENSE)
+metadata:
+  author: MathWorks
+  version: "1.0"
 ---
 
 # MATLAB Performance Optimizer

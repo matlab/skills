@@ -2,6 +2,9 @@
 name: matlab-test-creator
 description: Create comprehensive MATLAB unit tests using the MATLAB Testing Framework. Use when generating test files, test cases, unit tests, or when the user requests testing for MATLAB code, functions, or classes.
 license: MathWorks BSD-3-Clause (see LICENSE)
+metadata:
+  author: MathWorks
+  version: "1.0"
 ---
 
 # MATLAB Test Generator
