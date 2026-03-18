@@ -228,7 +228,8 @@ Verify the skill activates appropriately:
 
 Looking for inspiration? Here are some skill ideas:
 
-- **MATLAB Test Generator**: Create unit tests using MATLAB Testing Framework
+- **MATLAB Test Creator**: Create unit tests using the MATLAB Testing Framework
+- **MATLAB Test Execution**: Run tests, collect coverage, and configure CI/CD pipelines
 - **MATLAB Performance Optimizer**: Vectorization and performance improvement suggestions
 - **Simulink Model Documentation**: Generate documentation for Simulink models
 - **MATLAB App Designer Helper**: Guide for creating MATLAB App Designer applications
