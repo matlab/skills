@@ -26,8 +26,8 @@ Creates properly formatted MATLAB plain text Live Scripts (.m files) with rich t
 
 **When it activates**: Creating MATLAB scripts, educational content, Live Scripts, or .m files with documentation.
 
-### MATLAB Test Generator
-**Skill ID**: `matlab-test-generator`
+### MATLAB Test Creator
+**Skill ID**: `matlab-test-creator`
 
 Creates unit tests using the MATLAB Testing Framework. Generates test classes, test methods, and test suites following best practices:
 
@@ -37,9 +37,22 @@ Creates unit tests using the MATLAB Testing Framework. Generates test classes, t
 - Parameterized tests for data-driven testing
 - Setup and teardown methods for test fixtures
 - Test tagging and selective execution
-- Mock objects and performance testing
+- Mock objects and stubs for dependency isolation
 
 **When it activates**: Generating test files, test cases, unit tests, test suites, or when testing MATLAB code is requested.
+
+### MATLAB Test Execution
+**Skill ID**: `matlab-test-execution`
+
+Runs MATLAB tests, analyzes results, collects code coverage, and configures CI/CD pipelines:
+
+- Running and filtering test suites with `runtests`
+- Analyzing test results and diagnosing failures
+- Code coverage collection and gap identification
+- CI/CD integration with `buildtool` and `buildfile.m`
+- GitHub Actions, Azure DevOps, and GitLab CI configurations
+
+**When it activates**: Executing tests, filtering test suites, debugging test failures, generating coverage reports, or configuring CI/CD for MATLAB projects.
 
 ### MATLAB Performance Optimizer
 **Skill ID**: `matlab-performance-optimizer`
@@ -103,7 +116,7 @@ Designs and validates digital filters in MATLAB using Signal Processing Toolbox 
 /plugin install matlab-skills@matlab-skills
 ```
 
-This installs all MATLAB skills (`matlab-live-script`, `matlab-test-generator`, `matlab-performance-optimizer`, `matlab-uihtml-app-builder`, `matlab-digital-filter-design`) in one command. Skills automatically activate when Claude detects relevant tasks.
+This installs all MATLAB skills (`matlab-live-script`, `matlab-test-creator`, `matlab-test-execution`, `matlab-performance-optimizer`, `matlab-uihtml-app-builder`, `matlab-digital-filter-design`) in one command. Skills automatically activate when Claude detects relevant tasks.
 
 **Alternative**: Manually install to your personal skills directory:
 
