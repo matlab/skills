@@ -12,8 +12,8 @@
 
 % --- statement & function (always available) ---
 for type = ["statement", "function"]
-    [~, desc] = coverageSummary(covResults, type);
-    items = desc.(type);
+    [~, decs] = coverageSummary(covResults, type);
+    items = decs.(type);
     uncov = items([items.ExecutionCount] == 0);
     for i = 1:numel(uncov)
         fprintf('Uncovered %s: %s:%d (%s)\n', type, uncov(i).Filename, ...
@@ -22,37 +22,49 @@ for type = ["statement", "function"]
 end
 
 % --- decision (MetricLevel "decision"+) ---
-[~, desc] = coverageSummary(covResults, "decision");
-for i = 1:numel(desc.decision)
-    d = desc.decision(i);
-    for j = 1:numel(d.Outcome)
-        if d.Outcome(j).ExecutionCount == 0
-            fprintf('Uncovered decision: %s:%d — %s → %s\n', ...
-                d.Filename, d.SourceLocation.StartLine, d.Text, d.Outcome(j).Text);
+[~, decs] = coverageSummary(covResults, "decision");
+for numFilesWithDecisions = 1:numel(decs)
+    decisions = decs(numFilesWithDecisions).decision;
+    for i = 1:numel(decisions)
+        thisDecision = decisions(i);
+        outcomes = [thisDecision.Outcome];
+        for j = 1:numel(outcomes)
+            if outcomes(j).ExecutionCount == 0
+                fprintf('Uncovered decision: %s:%d — %s → %s\n', ...
+                    thisDecision.Filename, thisDecision.SourceLocation.StartLine, thisDecision.Text, outcomes(j).Text);
+            end
         end
     end
 end
 
-% --- condition (MetricLevel "condition"+) ---
-[~, desc] = coverageSummary(covResults, "condition");
-for i = 1:numel(desc.condition)
-    d = desc.condition(i); m = string.empty;
-    if d.TrueCount == 0, m(end+1) = "true"; end
-    if d.FalseCount == 0, m(end+1) = "false"; end
-    if ~isempty(m)
+%% --- condition (MetricLevel "condition"+) ---
+[~, decs] = coverageSummary(covResults, "condition");
+for numFilesWithConditions = 1:numel(decs)
+    conditions = decs(numFilesWithConditions).condition;
+    for i = 1:numel(conditions)
+    cond = conditions(i); 
+    if cond.TrueCount == 0
         fprintf('Uncovered condition: %s:%d — %s → %s\n', ...
-            d.Filename, d.SourceLocation.StartLine, d.Text, join(m, ", "));
+            cond.Filename, cond.SourceLocation.StartLine, cond.Text, join("true", ", "));
+    end
+    if cond.FalseCount == 0
+        fprintf('Uncovered condition: %s:%d — %s → %s\n', ...
+            cond.Filename, cond.SourceLocation.StartLine, cond.Text, join("false", ", "));
+    end
     end
 end
 
-% --- mcdc (MetricLevel "mcdc") ---
-[~, desc] = coverageSummary(covResults, "mcdc");
-for i = 1:numel(desc.mcdc)
-    d = desc.mcdc(i);
-    for j = 1:numel(d.Condition)
-        if ~d.Condition(j).Achieved
-            fprintf('Unachieved MC/DC: %s:%d — %s → %s\n', ...
-                d.Filename, d.SourceLocation.StartLine, d.Text, d.Condition(j).Text);
+%% --- mcdc (MetricLevel "mcdc") ---
+[~, decs] = coverageSummary(covResults, "mcdc");
+for i = 1:numel(decs)
+    d = decs(i).mcdc;
+    for j = 1:numel(d)
+        conditions = d(j).Condition;
+        for k = 1:numel(conditions)
+            if ~conditions(k).Achieved
+                fprintf('Unachieved MC/DC: %s:%d — %s → %s\n', ...
+                    d(j).Filename, d(j).SourceLocation.StartLine, d(j).Text, conditions(k).Text);
+            end
         end
     end
 end
