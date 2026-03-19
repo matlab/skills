@@ -2,6 +2,9 @@
 name: matlab-test-execution
 description: Run MATLAB tests, analyze results, collect code coverage, and set up CI/CD pipelines. Use when executing tests, filtering test suites, debugging test failures, generating coverage reports, or configuring buildtool and CI systems for MATLAB projects.
 license: MathWorks BSD-3-Clause (see LICENSE)
+metadata:
+  author: MathWorks
+  version: "1.0"
 ---
 
 # MATLAB Test Execution
