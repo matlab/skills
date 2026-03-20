@@ -4,7 +4,7 @@ description: Optimize MATLAB code for better performance through vectorization, 
 license: MathWorks BSD-3-Clause (see LICENSE)
 metadata:
   author: MathWorks
-  version: "1.0"
+  version: "1.1"
 ---
 
 # MATLAB Performance Optimizer

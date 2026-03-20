@@ -5,14 +5,14 @@
   },
   "metadata": {
     "description": "A collection of agent skills for MATLAB development, including Live Script generation, unit test creation and execution, performance optimization, HTML/JavaScript app building, and digital filter design.",
-    "version": "1.0.1"
+    "version": "1.0.2"
   },
   "plugins": [
     {
       "name": "matlab-skills",
       "source": "./",
       "description": "A collection of agent skills for MATLAB development",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "author": {
         "name": "The MathWorks, Inc."
       },
