@@ -46,19 +46,16 @@ For advanced control (custom plugins, programmatic suite manipulation), use `mat
 
 ```matlab
 results = runtests('tests');
+disp(results)
 
-nPassed = sum([results.Passed]);
-nFailed = sum([results.Failed]);
-nIncomplete = sum([results.Incomplete]);
+for r = results([results.Failed])
+    fprintf('\nFAILED: %s\n', r.Name);
+    disp(r.Details.DiagnosticRecord.Report);
+end
 
-% Inspect failures
-failedResults = results([results.Failed]);
-for i = 1:numel(failedResults)
-    failedTestPoint = failedResults(i).Name;
-    diagnostics = failedResults(i).Details.DiagnosticRecord;
-    % if user needs to see the results, use the following as a guide to display results
-    fprintf('\nFAILED: %s\n', failedTestPoint);
-    disp(diagnostics.Report);
+for r = results([results.Incomplete])
+    fprintf('\nINCOMPLETE: %s\n', r.Name);
+    disp(r.Details.DiagnosticRecord.Report);
 end
 ```
 
@@ -66,11 +63,11 @@ end
 
 ## Code Coverage
 
-If code coverage is required (explicitly requested or clearly implied), follow these steps: **Collect** → **Display** (when user should see results) → **Identify gaps** (only when user asks to generate tests for missing coverage).
+If code coverage is required (explicitly requested or clearly implied), follow these steps: **Collect and display** → **Identify gaps** (only when user asks to generate tests for missing coverage).
 
-### 1. Collect
+### 1. Collect and Display
 
-Run tests with coverage and extract per-file percentages in one pass. Include `CoverageResult` (programmatic) and `CoverageReport` (HTML). Add `CoberturaFormat` for CI. Use the highest `MetricLevel` available — `"mcdc"` if "MATLAB Test" is installed, otherwise omit it.
+Run tests with coverage. Include `CoverageResult` (programmatic) and `CoverageReport` (HTML). Add `CoberturaFormat` for CI. Use the highest `MetricLevel` available — `"mcdc"` if "MATLAB Test" is installed, otherwise omit it.
 
 ```matlab
 import matlab.unittest.TestRunner
@@ -85,51 +82,20 @@ runner.addPlugin(CodeCoveragePlugin.forFolder('src', ... % use forFile or forNam
     'MetricLevel', 'mcdc'));          % omit MetricLevel if MATLAB Test is unavailable
 results = runner.run(testsuite('tests'));
 
-% --- Extract percentages ---
 covResults = covFormat.Result;
-filenames = [covResults.Filename]';
-% Set types to match MetricLevel: mcdc→all five, condition→first four,
-% decision→first three, default (statement)→["statement","function"]
-types = ["statement", "function", "decision", "condition", "mcdc"];
-[covData, covTotals] = deal(NaN(numel(covResults), numel(types)), NaN(1, numel(types)));
-for k = 1:numel(types)
-    for j = 1:numel(covResults)
-        [s, ~] = coverageSummary(covResults(j), types(k));
-        if s(2) > 0, covData(j,k) = 100 * s(1) / s(2); end
-    end
-    [s, ~] = coverageSummary(covResults, types(k));
-    ex = sum(s(:,1)); tot = sum(s(:,2));
-    if tot > 0, covTotals(k) = 100 * ex / tot; end
+disp(covResults)              % aggregated summary
+for i = 1:numel(covResults)   % per-file breakdown
+    disp(covResults(i))
 end
 ```
 
-### 2. Display summary — only when showing results to user
+### 2. Identify gaps — only when generating tests for missing coverage
 
-```matlab
-File = [filenames; "TOTAL"];
-T = array2table([covData; covTotals], 'VariableNames', types);
-T = addvars(T, File, 'Before', 1);
-disp(T);
-```
+Read and run [scripts/printCoverageGaps.m](scripts/printCoverageGaps.m). It expects `covResults` from step 1 and prints uncovered items. Include tiers up to the `MetricLevel` used (the script has comments marking where to cut).
 
-### 3. Identify gaps — only when generating tests for missing coverage
+### 3. Act on gaps if requested by the user
 
-Read [scripts/collectCoverageGaps.m](scripts/collectCoverageGaps.m) for the full implementation. It expects `covResults` and `filenames` from the Collect step and produces a `gaps` struct. Include tiers up to the `MetricLevel` used (the script has comments marking where to cut).
-
-#### Display gaps — only when showing to user
-
-```matlab
-labels = struct('statement',"Uncovered Statements", 'function',"Uncovered Functions", ...
-    'decision',"Uncovered Decision Outcomes", 'condition',"Uncovered Condition Outcomes", ...
-    'mcdc',"Unachieved MC/DC Conditions");
-for f = string(fieldnames(gaps))'
-    if height(gaps.(f)) > 0, fprintf('\n%s:\n', labels.(f)); disp(gaps.(f)); end
-end
-```
-
-### 4. Act on gaps if requested by the user
-
-Use `gaps` from step 3 to target test generation — each table's `File` and `Line` columns pinpoint what needs coverage. Defer to the MATLAB test generation skill for writing tests.
+Use the uncovered items from step 2 to target test generation. Defer to the MATLAB test generation skill for writing tests.
 
 ---
 
