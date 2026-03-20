@@ -41,7 +41,7 @@ end
 ```matlab
 % Fast approach
 n = 1000000;
-i = 1:n;
+i = (1:n).';
 result = sin(i) .* cos(i);
 ```
 
@@ -258,17 +258,16 @@ y = x(indices);
 y = x(x > 5);
 ```
 
-### Pattern 2: Use bsxfun for Broadcasting
+### Pattern 2: Use Implicit Expansion Instead of repmat
 
 ```matlab
-% Instead of repmat
+% SLOW - repmat to match dimensions
 A = rand(1000, 5);
 B = rand(1, 5);
 C = A - repmat(B, size(A, 1), 1);
 
-% Use implicit expansion (R2016b+) or bsxfun
-C = A - B;  % Implicit expansion
-C = bsxfun(@minus, A, B);  % Older MATLAB
+% FAST - implicit expansion (R2016b+)
+C = A - B;
 ```
 
 ### Pattern 3: Avoid Repeated Calculations
@@ -335,8 +334,9 @@ filtered = filter(b, a, signal);
 filtered = conv2(image, kernel, 'same');
 filtered = imfilter(image, kernel);
 
-% FFT-based for large kernels
-filtered = ifft(fft(signal) .* fft(kernel, length(signal)));
+% FFT-based for large kernels (zero-pad for linear convolution)
+nfft = length(signal) + length(kernel) - 1;
+filtered = ifft(fft(signal, nfft) .* fft(kernel, nfft));
 ```
 
 ### Distance Calculations
@@ -354,10 +354,6 @@ end
 
 % FAST - vectorized
 distances = pdist2(points, points);
-
-% Or using bsxfun
-diff = bsxfun(@minus, permute(points, [1 3 2]), permute(points, [3 1 2]));
-distances = sqrt(sum(diff.^2, 3));
 ```
 
 ### Sorting and Searching
@@ -398,8 +394,9 @@ end
 % Create parallel pool
 parpool('local', 4);  % 4 workers
 
-% Use parallel array functions
-result = arrayfun(@expensiveFunction, data, 'UniformOutput', false);
+% Use parfeval for asynchronous parallel execution
+futures = parfeval(@expensiveFunction, 1, data);
+result = fetchOutputs(futures);
 
 % GPU arrays for massive parallelization
 gpuData = gpuArray(data);
@@ -522,16 +519,16 @@ Before finalizing optimized code, verify:
 
 ### Pitfall 3: Ignoring Memory Access Patterns
 ```matlab
-% SLOW - column-wise access (MATLAB is column-major)
-for j = 1:cols
-    for i = 1:rows
+% SLOW - inner loop over columns (row-major traversal in column-major MATLAB)
+for i = 1:rows
+    for j = 1:cols
         A(i,j) = process(i, j);
     end
 end
 
-% FAST - row-wise iteration, column-wise access
-for i = 1:rows
-    for j = 1:cols
+% FAST - inner loop over rows (column-major traversal, contiguous memory)
+for j = 1:cols
+    for i = 1:rows
         A(i,j) = process(i, j);
     end
 end
@@ -598,8 +595,8 @@ for i = window:n
     movingAvg(i) = mean(signal(i-window+1:i));
 end
 
-% FAST
-movingAvg = movmean(signal, window);
+% FAST - trailing window: [window-1 past samples, 0 future samples]
+movingAvg = movmean(signal, [window-1 0]);
 ```
 
 ## Troubleshooting Performance
