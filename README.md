@@ -228,6 +228,8 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ## Related Projects
 
+- [matlab/matlab-agentic-toolkit](https://github.com/matlab/matlab-agentic-toolkit) - Connects AI coding agents to a live MATLAB session. Agents evaluate code, run tests, perform static analysis, and detect installed toolboxes directly in MATLAB
+- [matlab/simulink-agentic-toolkit](https://github.com/matlab/simulink-agentic-toolkit) - Gives your AI agent both the tools and the expertise to work effectively with Simulink and Model-Based Design
 - [matlab/matlab-mcp-core-server](https://github.com/matlab/matlab-mcp-core-server) - Official MATLAB MCP Server for running MATLAB using AI applications like Claude Code and VS Code
 - [matlab/rules](https://github.com/matlab/rules) - MATLAB coding rules and guidelines optimized for AI coding assistants
 - [matlab/prompts](https://github.com/matlab/prompts) - Curated collection of AI prompts for MATLAB development
